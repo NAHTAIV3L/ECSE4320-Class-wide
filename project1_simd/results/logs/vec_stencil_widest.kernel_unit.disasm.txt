@@ -1,0 +1,81 @@
+0000000000402590 <kernel_unit.isra.0>:
+  402590:	c5 fb 10 06          	vmovsd (%rsi),%xmm0
+  402594:	48 83 ff 02          	cmp    $0x2,%rdi
+  402598:	49 89 f8             	mov    %rdi,%r8
+  40259b:	c5 fb 11 02          	vmovsd %xmm0,(%rdx)
+  40259f:	0f 86 1b 01 00 00    	jbe    4026c0 <kernel_unit.isra.0+0x130>
+  4025a5:	c4 e2 7d 19 35 22 0c 	vbroadcastsd 0xc22(%rip),%ymm6        # 4031d0 <_IO_stdin_used+0x1d0>
+  4025ac:	00 00 
+  4025ae:	48 8d 47 fd          	lea    -0x3(%rdi),%rax
+  4025b2:	c4 e2 7d 19 25 55 0c 	vbroadcastsd 0xc55(%rip),%ymm4        # 403210 <_IO_stdin_used+0x210>
+  4025b9:	00 00 
+  4025bb:	c4 e2 7d 19 2d 54 0c 	vbroadcastsd 0xc54(%rip),%ymm5        # 403218 <_IO_stdin_used+0x218>
+  4025c2:	00 00 
+  4025c4:	48 83 f8 02          	cmp    $0x2,%rax
+  4025c8:	0f 86 f9 00 00 00    	jbe    4026c7 <kernel_unit.isra.0+0x137>
+  4025ce:	4c 8d 4f fe          	lea    -0x2(%rdi),%r9
+  4025d2:	c5 fd 28 dd          	vmovapd %ymm5,%ymm3
+  4025d6:	c5 fd 28 d4          	vmovapd %ymm4,%ymm2
+  4025da:	31 c0                	xor    %eax,%eax
+  4025dc:	4c 89 c9             	mov    %r9,%rcx
+  4025df:	c5 fd 28 ce          	vmovapd %ymm6,%ymm1
+  4025e3:	48 c1 e9 02          	shr    $0x2,%rcx
+  4025e7:	48 89 cf             	mov    %rcx,%rdi
+  4025ea:	48 c1 e7 05          	shl    $0x5,%rdi
+  4025ee:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  4025f5:	00 00 
+  4025f7:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  4025fe:	00 00 
+  402600:	c5 e5 59 44 06 08    	vmulpd 0x8(%rsi,%rax,1),%ymm3,%ymm0
+  402606:	c4 e2 ed b8 04 06    	vfmadd231pd (%rsi,%rax,1),%ymm2,%ymm0
+  40260c:	c4 e2 f5 b8 44 06 10 	vfmadd231pd 0x10(%rsi,%rax,1),%ymm1,%ymm0
+  402613:	c5 fd 11 44 02 08    	vmovupd %ymm0,0x8(%rdx,%rax,1)
+  402619:	48 83 c0 20          	add    $0x20,%rax
+  40261d:	48 39 f8             	cmp    %rdi,%rax
+  402620:	75 de                	jne    402600 <kernel_unit.isra.0+0x70>
+  402622:	48 8d 04 8d 00 00 00 	lea    0x0(,%rcx,4),%rax
+  402629:	00 
+  40262a:	4c 39 c8             	cmp    %r9,%rax
+  40262d:	0f 84 85 00 00 00    	je     4026b8 <kernel_unit.isra.0+0x128>
+  402633:	48 8d 78 01          	lea    0x1(%rax),%rdi
+  402637:	4c 8d 48 02          	lea    0x2(%rax),%r9
+  40263b:	4c 89 c1             	mov    %r8,%rcx
+  40263e:	48 29 c1             	sub    %rax,%rcx
+  402641:	48 83 f9 03          	cmp    $0x3,%rcx
+  402645:	74 2c                	je     402673 <kernel_unit.isra.0+0xe3>
+  402647:	c5 c9 59 74 c6 10    	vmulpd 0x10(%rsi,%rax,8),%xmm6,%xmm6
+  40264d:	c4 e2 c9 98 6c c6 08 	vfmadd132pd 0x8(%rsi,%rax,8),%xmm6,%xmm5
+  402654:	c4 e2 d1 98 24 c6    	vfmadd132pd (%rsi,%rax,8),%xmm5,%xmm4
+  40265a:	c5 f9 11 64 c2 08    	vmovupd %xmm4,0x8(%rdx,%rax,8)
+  402660:	48 8d 41 fe          	lea    -0x2(%rcx),%rax
+  402664:	48 83 e0 fe          	and    $0xfffffffffffffffe,%rax
+  402668:	83 e1 01             	and    $0x1,%ecx
+  40266b:	74 4b                	je     4026b8 <kernel_unit.isra.0+0x128>
+  40266d:	48 01 c7             	add    %rax,%rdi
+  402670:	49 01 c1             	add    %rax,%r9
+  402673:	c5 f9 28 0d 95 0b 00 	vmovapd 0xb95(%rip),%xmm1        # 403210 <_IO_stdin_used+0x210>
+  40267a:	00 
+  40267b:	c5 f1 59 4c fe f8    	vmulpd -0x8(%rsi,%rdi,8),%xmm1,%xmm1
+  402681:	c4 a1 7b 10 3c ce    	vmovsd (%rsi,%r9,8),%xmm7
+  402687:	c5 f1 15 c1          	vunpckhpd %xmm1,%xmm1,%xmm0
+  40268b:	c5 f9 58 c1          	vaddpd %xmm1,%xmm0,%xmm0
+  40268f:	c4 e2 c1 b9 05 38 0b 	vfmadd231sd 0xb38(%rip),%xmm7,%xmm0        # 4031d0 <_IO_stdin_used+0x1d0>
+  402696:	00 00 
+  402698:	c5 fb 11 04 fa       	vmovsd %xmm0,(%rdx,%rdi,8)
+  40269d:	c5 f8 77             	vzeroupper
+  4026a0:	49 83 e8 01          	sub    $0x1,%r8
+  4026a4:	c4 a1 7b 10 04 c6    	vmovsd (%rsi,%r8,8),%xmm0
+  4026aa:	c4 a1 7b 11 04 c2    	vmovsd %xmm0,(%rdx,%r8,8)
+  4026b0:	c3                   	ret
+  4026b1:	48 8d b6 00 00 00 00 	lea    0x0(%rsi),%rsi
+  4026b8:	c5 f8 77             	vzeroupper
+  4026bb:	eb e3                	jmp    4026a0 <kernel_unit.isra.0+0x110>
+  4026bd:	48 89 f6             	mov    %rsi,%rsi
+  4026c0:	48 83 ff 01          	cmp    $0x1,%rdi
+  4026c4:	75 da                	jne    4026a0 <kernel_unit.isra.0+0x110>
+  4026c6:	c3                   	ret
+  4026c7:	31 c0                	xor    %eax,%eax
+  4026c9:	41 b9 02 00 00 00    	mov    $0x2,%r9d
+  4026cf:	bf 01 00 00 00       	mov    $0x1,%edi
+  4026d4:	e9 62 ff ff ff       	jmp    40263b <kernel_unit.isra.0+0xab>
+

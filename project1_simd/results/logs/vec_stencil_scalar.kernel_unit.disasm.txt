@@ -1,0 +1,46 @@
+0000000000401f60 <kernel_unit.isra.0>:
+  401f60:	f2 0f 10 06          	movsd  (%rsi),%xmm0
+  401f64:	f2 0f 11 02          	movsd  %xmm0,(%rdx)
+  401f68:	48 83 ff 02          	cmp    $0x2,%rdi
+  401f6c:	0f 86 96 00 00 00    	jbe    402008 <kernel_unit.isra.0+0xa8>
+  401f72:	f2 0f 10 4e 08       	movsd  0x8(%rsi),%xmm1
+  401f77:	f2 0f 10 2d 51 12 00 	movsd  0x1251(%rip),%xmm5        # 4031d0 <_IO_stdin_used+0x1d0>
+  401f7e:	00 
+  401f7f:	48 8d 0c fd f0 ff ff 	lea    -0x10(,%rdi,8),%rcx
+  401f86:	ff 
+  401f87:	31 c0                	xor    %eax,%eax
+  401f89:	f2 0f 10 25 47 12 00 	movsd  0x1247(%rip),%xmm4        # 4031d8 <_IO_stdin_used+0x1d8>
+  401f90:	00 
+  401f91:	f2 0f 10 1d 47 12 00 	movsd  0x1247(%rip),%xmm3        # 4031e0 <_IO_stdin_used+0x1e0>
+  401f98:	00 
+  401f99:	eb 2a                	jmp    401fc5 <kernel_unit.isra.0+0x65>
+  401f9b:	eb 23                	jmp    401fc0 <kernel_unit.isra.0+0x60>
+  401f9d:	48 8d b4 26 00 00 00 	lea    0x0(%rsi,%riz,1),%rsi
+  401fa4:	00 
+  401fa5:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  401fac:	00 00 
+  401fae:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  401fb5:	00 00 
+  401fb7:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  401fbe:	00 00 
+  401fc0:	f2 0f 10 04 06       	movsd  (%rsi,%rax,1),%xmm0
+  401fc5:	f2 0f 59 cc          	mulsd  %xmm4,%xmm1
+  401fc9:	f2 0f 59 c5          	mulsd  %xmm5,%xmm0
+  401fcd:	f2 0f 58 c1          	addsd  %xmm1,%xmm0
+  401fd1:	f2 0f 10 4c 06 10    	movsd  0x10(%rsi,%rax,1),%xmm1
+  401fd7:	66 0f 28 d1          	movapd %xmm1,%xmm2
+  401fdb:	f2 0f 59 d3          	mulsd  %xmm3,%xmm2
+  401fdf:	f2 0f 58 d0          	addsd  %xmm0,%xmm2
+  401fe3:	f2 0f 11 54 02 08    	movsd  %xmm2,0x8(%rdx,%rax,1)
+  401fe9:	48 83 c0 08          	add    $0x8,%rax
+  401fed:	48 39 c8             	cmp    %rcx,%rax
+  401ff0:	75 ce                	jne    401fc0 <kernel_unit.isra.0+0x60>
+  401ff2:	48 83 ef 01          	sub    $0x1,%rdi
+  401ff6:	f2 0f 10 04 fe       	movsd  (%rsi,%rdi,8),%xmm0
+  401ffb:	f2 0f 11 04 fa       	movsd  %xmm0,(%rdx,%rdi,8)
+  402000:	c3                   	ret
+  402001:	48 8d b6 00 00 00 00 	lea    0x0(%rsi),%rsi
+  402008:	48 83 ff 01          	cmp    $0x1,%rdi
+  40200c:	75 e4                	jne    401ff2 <kernel_unit.isra.0+0x92>
+  40200e:	c3                   	ret
+

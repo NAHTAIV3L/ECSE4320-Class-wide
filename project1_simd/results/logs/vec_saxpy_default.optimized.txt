@@ -1,0 +1,22 @@
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:368:23: optimized: loop vectorized using 32 byte vectors and unroll factor 4
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:368:23: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:96:26: optimized: loop vectorized using 32 byte vectors and unroll factor 4
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:96:26: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:96:26: optimized: loop vectorized using 32 byte vectors and unroll factor 4
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:96:26: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:97:26: optimized: loop vectorized using 32 byte vectors and unroll factor 4
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:97:26: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:370:23: optimized: loop vectorized using 32 byte vectors and unroll factor 4
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:370:23: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:97:26: optimized: loop vectorized using 32 byte vectors and unroll factor 4
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:97:26: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:370:23: optimized: loop vectorized using 32 byte vectors and unroll factor 4
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:370:23: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:97:26: optimized: loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:370:23: optimized: loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:97:26: optimized: loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:370:23: optimized: loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:181:26: optimized: loop vectorized using 16 byte vectors and unroll factor 4
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:124:26: optimized: loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:489:23: optimized: loop vectorized using 16 byte vectors and unroll factor 2
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:103:26: optimized: loop vectorized using 16 byte vectors and unroll factor 4

@@ -1,0 +1,274 @@
+* Project 1 SIMD Profiling
+
+** Building and running:
+
+#+BEGIN_SRC sh
+  ./configure
+  ninja -j$(nproc)
+  ./scripts/run_experiments.sh quick # could be full instead of quick.
+  ./scripts/verify_vectorization.sh  # checks for widest vector usage
+  python ./scripts/plot_results.py   # plot the data generated from ./scripts/run_experiments.sh
+#+END_SRC
+
+** Pre-experiment hypotheses:
+
+1. Using default and widest optimizations should increase throughput. This
+   benefit should decrease as the set size increases because of using worse
+   caches. This will eventually get to where the optimizations can't speed up
+   the operation any faster because of RAM speed.
+2. Sequential operations should be faster than any set stride or gather
+   operations. This should also converge because of the previous reason.
+3. Doing anything with float64 instead of float32 should be half as many GFLOPS
+   but the same byte throughput.
+
+** Differing compilation options:
+
+| label     | compiler flags                                                            | reasoning                                                                    |
+|-----------+---------------------------------------------------------------------------+------------------------------------------------------------------------------|
+| =Scalar=  | ~-march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize~           | scalar baseline with optimisation enabled                                    |
+| =Default= | ~-march=x86-64 -O3 -ftree-vectorize~                                      | baseline x86-64 (SSE2, 128-bit) auto-vectorisation                           |
+| =Widest=  | ~-march=native -O3 -mprefer-vector-width=256 -ffast-math -fno-math-errno~ | widest ISA (AVX2, 256-bit) plus FP reassociation so reductions can vectorise |
+
+** My computer specific info
+
+My computer defaults to doing ~-march=x86_64-v3~ so this has to be
+disabled. Also default optimizations are turned on while disabling vectorization
+optimizations. Also according to DeepSeek V4.1 Flash ~-ffast-math~ has to be
+used in =widest= for the compiler to optimize the dot product kernel.
+
+I also have AVX2/AVX-VNNI as CPU flags. This allows for 265 bit registers but no
+512 registers because I dont have AVX512. The file:
+[[./results/env/environment.txt]] shows a more verbose version of my computer's
+environment. This environment is generated with [[./scripts/capture_env.sh]]
+
+** Experiments
+
+| Study                                                   |        Plots |
+|---------------------------------------------------------+--------------|
+| Scalar vs auto-vectorized vs widest across working sets |         1, 2 |
+| Locality sweep with cache annotations                   |            3 |
+| Alignment and tail handling                             |          4,5 |
+| Stride/gather                                           | 6, 7, 11, 12 |
+| Data-type comparison                                    |            8 |
+| Roofline                                                |            9 |
+| Negative example                                        |           10 |
+
+** Plot analysis
+
+*** Throughput vs working set
+
+For each of these graphs the throughput and GFLOPS converge as working set
+increases. This is because the speed gets throttled by dram speed and the cpu
+cannot go any faster. You can also see the speed up that was attained by doing
+vectorization of the operations. Talking with other people in the class
+(Timon). He was not able to get dot product to get a throughput/GFLOP
+increase. This seems to give fruit to the extra compiler flags for optimizing
+the dot product stated above.
+
+[[./results/graphs/01_throughput_vs_working_set_dot_4B.png][throughput vs working set dot product float32]]
+
+[[./results/graphs/01_throughput_vs_working_set_dot_8B.png][throughput vs working set dot product float64]]
+
+[[./results/graphs/01_throughput_vs_working_set_multiply_4B.png][throughput vs working set multiply float32]]
+
+[[./results/graphs/01_throughput_vs_working_set_multiply_8B.png][throughput vs working set multiply float64]]
+
+[[./results/graphs/01_throughput_vs_working_set_saxpy_4B.png][throughput vs working set saxpy float32]]
+
+[[./results/graphs/01_throughput_vs_working_set_saxpy_8B.png][throughput vs working set saxpy float64]]
+
+[[./results/graphs/01_throughput_vs_working_set_stencil_4B.png][throughput vs working set stencil float32]]
+
+[[./results/graphs/01_throughput_vs_working_set_stencil_8B.png][throughput vs working set stencil float64]]
+
+*** Speedup vs working set
+
+These show the GFLOPS/s of =Widest= and =Default= over =Scalar=. Unsuprisingly
+the speedup for the float64 runs were much slower than the speedup for the
+float32 graphs because there were half as many GFLOPS/s due to the increased
+value size. Besides this it is easily visible where the =Default= optimization
+was not enough to vectorize the operation. In the dot product examples there is
+almost no change in the speed of the =Default= compared to the =Scalar=.
+
+[[./results/graphs/02_speedup_vs_working_set_dot_4B.png][speedup vs working set dot product float32]]
+
+[[./results/graphs/02_speedup_vs_working_set_dot_8B.png][speedup vs working set dot product float64]]
+
+[[./results/graphs/02_speedup_vs_working_set_multiply_4B.png][speedup vs working set multiply float32]]
+
+[[./results/graphs/02_speedup_vs_working_set_multiply_8B.png][speedup vs working set multiply float64]]
+
+[[./results/graphs/02_speedup_vs_working_set_saxpy_4B.png][speedup vs working set saxpy float32]]
+
+[[./results/graphs/02_speedup_vs_working_set_saxpy_8B.png][speedup vs working set saxpy float64]]
+
+[[./results/graphs/02_speedup_vs_working_set_stencil_4B.png][speedup vs working set stencil float32]]
+
+[[./results/graphs/02_speedup_vs_working_set_stencil_8B.png][speedup vs working set stencil float64]]
+
+*** Locality
+
+The most obvious example changing cache levels is in the dot product graph
+below. There is a really big drop of speed and then it go flat for a short time,
+then drops a ton. There is also clear evidence of dram throttling by all of
+results compressing as footprint increases.
+
+[[./results/graphs/03_locality_sweep_dot.png][locality sweep dot product]]
+
+[[./results/graphs/03_locality_sweep_multiply.png][locality sweep multiply]]
+
+[[./results/graphs/03_locality_sweep_stencil.png][locality sweep stencil]]
+
+*** Throughput vs alignment
+
+A lot of SIMD instructions only allow loading memory from aligned bytes, so
+having the array be unaligned gives big performance penalties. which can be
+seen. These most likely happen at one byte from a 4 or 8 byte alignment. There
+are some SIMD instructions for loading from an unaligned address but I would
+assume that they are slower than the aligned loading ones. which could be a
+general slowdown that the compiler had to do because of the chance that the
+bytes are not aligned.
+
+[[./results/graphs/04_alignment_dot_4B.png][alignment dot product float32]]
+
+[[./results/graphs/04_alignment_dot_8B.png][alignment dot product float64]]
+
+[[./results/graphs/04_alignment_multiply_4B.png][alignment multiply float32]]
+
+[[./results/graphs/04_alignment_multiply_8B.png][alignment multiply float64]]
+
+[[./results/graphs/04_alignment_saxpy_4B.png][alignment saxpy float32]]
+
+[[./results/graphs/04_alignment_saxpy_8B.png][alignment saxpy float64]]
+
+[[./results/graphs/04_alignment_stencil_4B.png][alignment stencil float32]]
+
+[[./results/graphs/04_alignment_stencil_8B.png][alignment stencil float64]]
+
+*** Tail handling
+
+The tail handling graphs are mostly linear because every size that is not
+perfectly divisble by the size of the SIMD registers. There are weird slopes at
+the begining of the graphs which is probably because of those lengths fit in L3
+cache.
+
+[[./results/graphs/05_tail_handling_dot_4B.png][tail handling dot product float32]]
+
+[[./results/graphs/05_tail_handling_dot_8B.png][tail handling dot product float64]]
+
+[[./results/graphs/05_tail_handling_multiply_4B.png][tail handing multiply float32]]
+
+[[./results/graphs/05_tail_handling_multiply_8B.png][tail handling multiply float64]]
+
+[[./results/graphs/05_tail_handling_saxpy_4B.png][tail handling saxpy float32]]
+
+[[./results/graphs/05_tail_handling_saxpy_8B.png][tail handling saxpy float64]]
+
+[[./results/graphs/05_tail_handling_stencil_4B.png][tail handling stencil float32]]
+
+[[./results/graphs/05_tail_handling_stencil_8B.png][tail handling stencil float64]]
+
+*** Stride
+
+These all compare throughput vs stride. Having a stride any bigger than 1 is not
+good for performance because it increases cache misses. This then slows down the
+entire process because you hit the memory throttling much faster than a
+sequential walk. Because of this all three optimization levels compress much
+faster.
+
+[[./results/graphs/06_stride_dot_4B.png][stride dot product float32]]
+
+[[./results/graphs/06_stride_dot_8B.png][stride dot product float64]]
+
+[[./results/graphs/06_stride_multiply_4B.png][stride multiply float32]]
+
+[[./results/graphs/06_stride_multiply_8B.png][stride multiply float64]]
+
+[[./results/graphs/06_stride_saxpy_4B.png][stride saxpy float32]]
+
+[[./results/graphs/06_stride_saxpy_8B.png][stride saxpy float64]]
+
+[[./results/graphs/06_stride_stencil_4B.png][stride stencil float32]]
+
+[[./results/graphs/06_stride_stencil_8B.png][stride stencil float64]]
+
+*** Stride efficiency
+
+This is the =Widest= optimization throughput divided by the =Scalar=
+throughput. Because all of them compress very fast the efficiency is almost
+always zero.
+
+[[./results/graphs/07_stride_efficiency_dot_4B.png][stride efficiency dot product float32]]
+
+[[./results/graphs/07_stride_efficiency_dot_8B.png][stride efficiency dot product float64]]
+
+[[./results/graphs/07_stride_efficiency_multiply_4B.png][stride efficiency multiply float32]]
+
+[[./results/graphs/07_stride_efficiency_multiply_8B.png][stride efficiency multiply float64]]
+
+[[./results/graphs/07_stride_efficiency_saxpy_4B.png][stride efficiency saxpy float32]]
+
+[[./results/graphs/07_stride_efficiency_saxpy_8B.png][stride efficiency saxpy float64]]
+
+[[./results/graphs/07_stride_efficiency_stencil_4B.png][stride efficiency stencil float32]]
+
+[[./results/graphs/07_stride_efficiency_stencil_8B.png][stride efficiency stencil float64]]
+
+*** Datatype comparison
+
+The first graph of GFLOPS is around where it should be for all of these. Float32
+has more GFLOPS because there are twice the number of operations per cpu
+instruction. The same number of bytes is acted on though, so the throughput is
+reasonably similar.
+
+[[./results/graphs/08_dtype_comparison_dot.png][datatype comparison dot product]]
+
+[[./results/graphs/08_dtype_comparison_multiply.png][datatype comparison multiply]]
+
+[[./results/graphs/08_dtype_comparison_saxpy.png][datatype comparison saxpy]]
+
+[[./results/graphs/08_dtype_comparison_stencil.png][datatype comparison stencil]]
+
+*** Roofline
+
+In both of these the program is outperforming the simple model. This is probably
+because of all of the cpu optimizations for using the ram as little as possible,
+and would probably be worse on the less optimized binaries.
+
+[[./results/graphs/09_roofline_4B.png][roofline float32]]
+
+[[./results/graphs/09_roofline_8B.png][roofline float64]]
+
+*** Negative examples
+
+This graph compares all of the speedups for widest vs working set. Multiply on
+float64 is almost no speedup because the scalar is already very fast.
+
+[[./results/graphs/10_negative_examples.png][negative examples]]
+
+*** Gather vs Unit
+
+All of these graphs compare the throughput of gather versus a sequential scan
+over the data. Unsuprisingly the throughput of gather is really slow while the
+sequential version is really fast.
+
+[[./results/graphs/11_gather_vs_unit_dot.png][gather vs unit dot product]]
+
+[[./results/graphs/11_gather_vs_unit_multiply.png][gather vs unit multiply]]
+
+[[./results/graphs/11_gather_vs_unit_saxpy.png][gather vs unit saxpy]]
+
+[[./results/graphs/11_gather_vs_unit_stencil.png][gather vs unit stencil]]
+
+*** Gather SIMD efficiency
+
+This is just a speedup version of the previous graphs showing that gather is a
+very bad for performance because of the many cache misses.
+
+[[./results/graphs/12_gather_simd_efficiency_dot.png][gather SIMD efficiency dot product]]
+
+[[./results/graphs/12_gather_simd_efficiency_multiply.png][gather SIMD efficiency multiply]]
+
+[[./results/graphs/12_gather_simd_efficiency_saxpy.png][gather SIMD efficiency saxpy]]
+
+[[./results/graphs/12_gather_simd_efficiency_stencil.png][gather SIMD efficiency stencil]]

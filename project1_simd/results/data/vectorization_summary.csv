@@ -1,0 +1,13 @@
+kernel,optimization,kernel_xmm_refs,kernel_ymm_refs,kernel_zmm_refs,kernel_fma_ymm,vectorized_kernel_reports,missed_kernel_reports
+saxpy,scalar,5,0,0,0,0,0
+saxpy,default,11,0,0,0,1,0
+saxpy,widest,7,5,0,1,2,0
+dot,scalar,6,0,0,0,0,0
+dot,default,13,0,0,0,1,0
+dot,widest,26,15,0,4,2,0
+multiply,scalar,3,0,0,0,0,0
+multiply,default,10,0,0,0,1,0
+multiply,widest,6,3,0,0,2,0
+stencil,scalar,17,0,0,0,0,0
+stencil,default,30,0,0,0,1,0
+stencil,widest,15,10,0,2,2,0

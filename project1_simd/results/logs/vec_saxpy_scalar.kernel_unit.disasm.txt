@@ -1,0 +1,14 @@
+0000000000401ed0 <kernel_unit.isra.0>:
+  401ed0:	f2 0f 10 0d f0 02 00 	movsd  0x2f0(%rip),%xmm1        # 4021c8 <_IO_stdin_used+0x1c8>
+  401ed7:	00 
+  401ed8:	31 c0                	xor    %eax,%eax
+  401eda:	2e 48 8d 74 26 00    	cs lea 0x0(%rsi,%riz,1),%rsi
+  401ee0:	f2 0f 10 04 c6       	movsd  (%rsi,%rax,8),%xmm0
+  401ee5:	f2 0f 59 c1          	mulsd  %xmm1,%xmm0
+  401ee9:	f2 0f 58 04 c2       	addsd  (%rdx,%rax,8),%xmm0
+  401eee:	f2 0f 11 04 c2       	movsd  %xmm0,(%rdx,%rax,8)
+  401ef3:	48 83 c0 01          	add    $0x1,%rax
+  401ef7:	48 39 f8             	cmp    %rdi,%rax
+  401efa:	75 e4                	jne    401ee0 <kernel_unit.isra.0+0x10>
+  401efc:	c3                   	ret
+

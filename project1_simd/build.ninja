@@ -1,0 +1,194 @@
+builddir = build
+cflags-saxpy-scalar-float = -DSAXPY -DTYPE=float -DOPT_NAME=scalar -DTYPE_FLOAT -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+rule cc-saxpy-scalar-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-saxpy-scalar-float $in -o $out -lm
+build build/saxpy-scalar-float: cc-saxpy-scalar-float main.c
+build saxpy-scalar-float: phony build/saxpy-scalar-float
+cflags-saxpy-scalar-double = -DSAXPY -DTYPE=double -DOPT_NAME=scalar  -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+rule cc-saxpy-scalar-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-saxpy-scalar-double $in -o $out -lm
+build build/saxpy-scalar-double: cc-saxpy-scalar-double main.c
+build saxpy-scalar-double: phony build/saxpy-scalar-double
+cflags-saxpy-default-float = -DSAXPY -DTYPE=float -DOPT_NAME=default -DTYPE_FLOAT -march=x86-64 -O3 -ftree-vectorize -std=c11 -Wall -Wextra
+rule cc-saxpy-default-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-saxpy-default-float $in -o $out -lm
+build build/saxpy-default-float: cc-saxpy-default-float main.c
+build saxpy-default-float: phony build/saxpy-default-float
+cflags-saxpy-default-double = -DSAXPY -DTYPE=double -DOPT_NAME=default  -march=x86-64 -O3 -ftree-vectorize -std=c11 -Wall -Wextra
+rule cc-saxpy-default-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-saxpy-default-double $in -o $out -lm
+build build/saxpy-default-double: cc-saxpy-default-double main.c
+build saxpy-default-double: phony build/saxpy-default-double
+cflags-saxpy-widest-float = -DSAXPY -DTYPE=float -DOPT_NAME=widest -DTYPE_FLOAT -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra
+rule cc-saxpy-widest-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-saxpy-widest-float $in -o $out -lm
+build build/saxpy-widest-float: cc-saxpy-widest-float main.c
+build saxpy-widest-float: phony build/saxpy-widest-float
+cflags-saxpy-widest-double = -DSAXPY -DTYPE=double -DOPT_NAME=widest  -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra
+rule cc-saxpy-widest-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-saxpy-widest-double $in -o $out -lm
+build build/saxpy-widest-double: cc-saxpy-widest-double main.c
+build saxpy-widest-double: phony build/saxpy-widest-double
+cflags-dot-scalar-float = -DDOT -DTYPE=float -DOPT_NAME=scalar -DTYPE_FLOAT -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+rule cc-dot-scalar-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-dot-scalar-float $in -o $out -lm
+build build/dot-scalar-float: cc-dot-scalar-float main.c
+build dot-scalar-float: phony build/dot-scalar-float
+cflags-dot-scalar-double = -DDOT -DTYPE=double -DOPT_NAME=scalar  -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+rule cc-dot-scalar-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-dot-scalar-double $in -o $out -lm
+build build/dot-scalar-double: cc-dot-scalar-double main.c
+build dot-scalar-double: phony build/dot-scalar-double
+cflags-dot-default-float = -DDOT -DTYPE=float -DOPT_NAME=default -DTYPE_FLOAT -march=x86-64 -O3 -ftree-vectorize -std=c11 -Wall -Wextra
+rule cc-dot-default-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-dot-default-float $in -o $out -lm
+build build/dot-default-float: cc-dot-default-float main.c
+build dot-default-float: phony build/dot-default-float
+cflags-dot-default-double = -DDOT -DTYPE=double -DOPT_NAME=default  -march=x86-64 -O3 -ftree-vectorize -std=c11 -Wall -Wextra
+rule cc-dot-default-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-dot-default-double $in -o $out -lm
+build build/dot-default-double: cc-dot-default-double main.c
+build dot-default-double: phony build/dot-default-double
+cflags-dot-widest-float = -DDOT -DTYPE=float -DOPT_NAME=widest -DTYPE_FLOAT -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra
+rule cc-dot-widest-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-dot-widest-float $in -o $out -lm
+build build/dot-widest-float: cc-dot-widest-float main.c
+build dot-widest-float: phony build/dot-widest-float
+cflags-dot-widest-double = -DDOT -DTYPE=double -DOPT_NAME=widest  -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra
+rule cc-dot-widest-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-dot-widest-double $in -o $out -lm
+build build/dot-widest-double: cc-dot-widest-double main.c
+build dot-widest-double: phony build/dot-widest-double
+cflags-multiply-scalar-float = -DMULTIPLY -DTYPE=float -DOPT_NAME=scalar -DTYPE_FLOAT -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+rule cc-multiply-scalar-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-multiply-scalar-float $in -o $out -lm
+build build/multiply-scalar-float: cc-multiply-scalar-float main.c
+build multiply-scalar-float: phony build/multiply-scalar-float
+cflags-multiply-scalar-double = -DMULTIPLY -DTYPE=double -DOPT_NAME=scalar  -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+rule cc-multiply-scalar-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-multiply-scalar-double $in -o $out -lm
+build build/multiply-scalar-double: cc-multiply-scalar-double main.c
+build multiply-scalar-double: phony build/multiply-scalar-double
+cflags-multiply-default-float = -DMULTIPLY -DTYPE=float -DOPT_NAME=default -DTYPE_FLOAT -march=x86-64 -O3 -ftree-vectorize -std=c11 -Wall -Wextra
+rule cc-multiply-default-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-multiply-default-float $in -o $out -lm
+build build/multiply-default-float: cc-multiply-default-float main.c
+build multiply-default-float: phony build/multiply-default-float
+cflags-multiply-default-double = -DMULTIPLY -DTYPE=double -DOPT_NAME=default  -march=x86-64 -O3 -ftree-vectorize -std=c11 -Wall -Wextra
+rule cc-multiply-default-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-multiply-default-double $in -o $out -lm
+build build/multiply-default-double: cc-multiply-default-double main.c
+build multiply-default-double: phony build/multiply-default-double
+cflags-multiply-widest-float = -DMULTIPLY -DTYPE=float -DOPT_NAME=widest -DTYPE_FLOAT -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra
+rule cc-multiply-widest-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-multiply-widest-float $in -o $out -lm
+build build/multiply-widest-float: cc-multiply-widest-float main.c
+build multiply-widest-float: phony build/multiply-widest-float
+cflags-multiply-widest-double = -DMULTIPLY -DTYPE=double -DOPT_NAME=widest  -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra
+rule cc-multiply-widest-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-multiply-widest-double $in -o $out -lm
+build build/multiply-widest-double: cc-multiply-widest-double main.c
+build multiply-widest-double: phony build/multiply-widest-double
+cflags-stencil-scalar-float = -DSTENCIL -DTYPE=float -DOPT_NAME=scalar -DTYPE_FLOAT -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+rule cc-stencil-scalar-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-stencil-scalar-float $in -o $out -lm
+build build/stencil-scalar-float: cc-stencil-scalar-float main.c
+build stencil-scalar-float: phony build/stencil-scalar-float
+cflags-stencil-scalar-double = -DSTENCIL -DTYPE=double -DOPT_NAME=scalar  -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+rule cc-stencil-scalar-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-stencil-scalar-double $in -o $out -lm
+build build/stencil-scalar-double: cc-stencil-scalar-double main.c
+build stencil-scalar-double: phony build/stencil-scalar-double
+cflags-stencil-default-float = -DSTENCIL -DTYPE=float -DOPT_NAME=default -DTYPE_FLOAT -march=x86-64 -O3 -ftree-vectorize -std=c11 -Wall -Wextra
+rule cc-stencil-default-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-stencil-default-float $in -o $out -lm
+build build/stencil-default-float: cc-stencil-default-float main.c
+build stencil-default-float: phony build/stencil-default-float
+cflags-stencil-default-double = -DSTENCIL -DTYPE=double -DOPT_NAME=default  -march=x86-64 -O3 -ftree-vectorize -std=c11 -Wall -Wextra
+rule cc-stencil-default-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-stencil-default-double $in -o $out -lm
+build build/stencil-default-double: cc-stencil-default-double main.c
+build stencil-default-double: phony build/stencil-default-double
+cflags-stencil-widest-float = -DSTENCIL -DTYPE=float -DOPT_NAME=widest -DTYPE_FLOAT -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra
+rule cc-stencil-widest-float
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-stencil-widest-float $in -o $out -lm
+build build/stencil-widest-float: cc-stencil-widest-float main.c
+build stencil-widest-float: phony build/stencil-widest-float
+cflags-stencil-widest-double = -DSTENCIL -DTYPE=double -DOPT_NAME=widest  -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra
+rule cc-stencil-widest-double
+  deps = gcc
+  depfile = $out.d
+  description = CC $out
+  command = gcc -MD -MF $out.d $cflags-stencil-widest-double $in -o $out -lm
+build build/stencil-widest-double: cc-stencil-widest-double main.c
+build stencil-widest-double: phony build/stencil-widest-double
+default  saxpy-scalar-float saxpy-scalar-double saxpy-default-float saxpy-default-double saxpy-widest-float saxpy-widest-double dot-scalar-float dot-scalar-double dot-default-float dot-default-double dot-widest-float dot-widest-double multiply-scalar-float multiply-scalar-double multiply-default-float multiply-default-double multiply-widest-float multiply-widest-double stencil-scalar-float stencil-scalar-double stencil-default-float stencil-default-double stencil-widest-float stencil-widest-double

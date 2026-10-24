@@ -1,0 +1,67 @@
+0000000000402260 <kernel_unit.isra.0>:
+  402260:	f2 0f 10 06          	movsd  (%rsi),%xmm0
+  402264:	f2 0f 11 02          	movsd  %xmm0,(%rdx)
+  402268:	48 83 ff 02          	cmp    $0x2,%rdi
+  40226c:	0f 86 de 00 00 00    	jbe    402350 <kernel_unit.isra.0+0xf0>
+  402272:	48 83 ff 03          	cmp    $0x3,%rdi
+  402276:	0f 84 db 00 00 00    	je     402357 <kernel_unit.isra.0+0xf7>
+  40227c:	4c 8d 4f fe          	lea    -0x2(%rdi),%r9
+  402280:	66 0f 10 0e          	movupd (%rsi),%xmm1
+  402284:	31 c0                	xor    %eax,%eax
+  402286:	f2 0f 10 2d 4a 0f 00 	movsd  0xf4a(%rip),%xmm5        # 4031d8 <_IO_stdin_used+0x1d8>
+  40228d:	00 
+  40228e:	4d 89 c8             	mov    %r9,%r8
+  402291:	f2 0f 10 25 37 0f 00 	movsd  0xf37(%rip),%xmm4        # 4031d0 <_IO_stdin_used+0x1d0>
+  402298:	00 
+  402299:	f2 0f 10 1d 3f 0f 00 	movsd  0xf3f(%rip),%xmm3        # 4031e0 <_IO_stdin_used+0x1e0>
+  4022a0:	00 
+  4022a1:	49 d1 e8             	shr    $1,%r8
+  4022a4:	66 0f 14 ed          	unpcklpd %xmm5,%xmm5
+  4022a8:	4c 89 c1             	mov    %r8,%rcx
+  4022ab:	66 0f 14 e4          	unpcklpd %xmm4,%xmm4
+  4022af:	66 0f 14 db          	unpcklpd %xmm3,%xmm3
+  4022b3:	48 c1 e1 04          	shl    $0x4,%rcx
+  4022b7:	eb 0b                	jmp    4022c4 <kernel_unit.isra.0+0x64>
+  4022b9:	48 8d b6 00 00 00 00 	lea    0x0(%rsi),%rsi
+  4022c0:	66 0f 28 ca          	movapd %xmm2,%xmm1
+  4022c4:	66 0f 10 44 06 08    	movupd 0x8(%rsi,%rax,1),%xmm0
+  4022ca:	66 0f 59 cc          	mulpd  %xmm4,%xmm1
+  4022ce:	66 0f 10 54 06 10    	movupd 0x10(%rsi,%rax,1),%xmm2
+  4022d4:	66 0f 59 c5          	mulpd  %xmm5,%xmm0
+  4022d8:	66 0f 58 c1          	addpd  %xmm1,%xmm0
+  4022dc:	66 0f 28 ca          	movapd %xmm2,%xmm1
+  4022e0:	66 0f 59 cb          	mulpd  %xmm3,%xmm1
+  4022e4:	66 0f 58 c1          	addpd  %xmm1,%xmm0
+  4022e8:	0f 11 44 02 08       	movups %xmm0,0x8(%rdx,%rax,1)
+  4022ed:	48 83 c0 10          	add    $0x10,%rax
+  4022f1:	48 39 c1             	cmp    %rax,%rcx
+  4022f4:	75 ca                	jne    4022c0 <kernel_unit.isra.0+0x60>
+  4022f6:	4b 8d 04 00          	lea    (%r8,%r8,1),%rax
+  4022fa:	4c 39 c8             	cmp    %r9,%rax
+  4022fd:	74 3d                	je     40233c <kernel_unit.isra.0+0xdc>
+  4022ff:	48 8d 48 01          	lea    0x1(%rax),%rcx
+  402303:	48 83 c0 02          	add    $0x2,%rax
+  402307:	f2 0f 10 05 c1 0e 00 	movsd  0xec1(%rip),%xmm0        # 4031d0 <_IO_stdin_used+0x1d0>
+  40230e:	00 
+  40230f:	f2 0f 10 0d c1 0e 00 	movsd  0xec1(%rip),%xmm1        # 4031d8 <_IO_stdin_used+0x1d8>
+  402316:	00 
+  402317:	f2 0f 59 44 ce f8    	mulsd  -0x8(%rsi,%rcx,8),%xmm0
+  40231d:	f2 0f 59 0c ce       	mulsd  (%rsi,%rcx,8),%xmm1
+  402322:	f2 0f 58 c1          	addsd  %xmm1,%xmm0
+  402326:	f2 0f 10 0d b2 0e 00 	movsd  0xeb2(%rip),%xmm1        # 4031e0 <_IO_stdin_used+0x1e0>
+  40232d:	00 
+  40232e:	f2 0f 59 0c c6       	mulsd  (%rsi,%rax,8),%xmm1
+  402333:	f2 0f 58 c1          	addsd  %xmm1,%xmm0
+  402337:	f2 0f 11 04 ca       	movsd  %xmm0,(%rdx,%rcx,8)
+  40233c:	48 83 ef 01          	sub    $0x1,%rdi
+  402340:	f2 0f 10 04 fe       	movsd  (%rsi,%rdi,8),%xmm0
+  402345:	f2 0f 11 04 fa       	movsd  %xmm0,(%rdx,%rdi,8)
+  40234a:	c3                   	ret
+  40234b:	48 8d 74 26 00       	lea    0x0(%rsi,%riz,1),%rsi
+  402350:	48 83 ff 01          	cmp    $0x1,%rdi
+  402354:	75 e6                	jne    40233c <kernel_unit.isra.0+0xdc>
+  402356:	c3                   	ret
+  402357:	b8 02 00 00 00       	mov    $0x2,%eax
+  40235c:	b9 01 00 00 00       	mov    $0x1,%ecx
+  402361:	eb a4                	jmp    402307 <kernel_unit.isra.0+0xa7>
+

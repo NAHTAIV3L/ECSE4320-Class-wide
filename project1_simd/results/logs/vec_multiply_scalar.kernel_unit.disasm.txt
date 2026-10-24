@@ -1,0 +1,19 @@
+0000000000401da0 <kernel_unit>:
+  401da0:	31 c0                	xor    %eax,%eax
+  401da2:	eb 1c                	jmp    401dc0 <kernel_unit+0x20>
+  401da4:	90                   	nop
+  401da5:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  401dac:	00 00 
+  401dae:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  401db5:	00 00 
+  401db7:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  401dbe:	00 00 
+  401dc0:	f2 0f 10 04 c6       	movsd  (%rsi,%rax,8),%xmm0
+  401dc5:	f2 0f 59 04 c2       	mulsd  (%rdx,%rax,8),%xmm0
+  401dca:	f2 0f 11 04 c1       	movsd  %xmm0,(%rcx,%rax,8)
+  401dcf:	48 83 c0 01          	add    $0x1,%rax
+  401dd3:	48 39 c7             	cmp    %rax,%rdi
+  401dd6:	75 e8                	jne    401dc0 <kernel_unit+0x20>
+  401dd8:	c3                   	ret
+  401dd9:	48 8d b6 00 00 00 00 	lea    0x0(%rsi),%rsi
+

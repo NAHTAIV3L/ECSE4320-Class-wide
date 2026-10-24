@@ -1,0 +1,54 @@
+0000000000402420 <kernel_unit>:
+  402420:	48 8d 47 ff          	lea    -0x1(%rdi),%rax
+  402424:	49 89 f0             	mov    %rsi,%r8
+  402427:	48 89 d6             	mov    %rdx,%rsi
+  40242a:	48 83 f8 02          	cmp    $0x2,%rax
+  40242e:	0f 86 9c 00 00 00    	jbe    4024d0 <kernel_unit+0xb0>
+  402434:	48 89 fa             	mov    %rdi,%rdx
+  402437:	31 c0                	xor    %eax,%eax
+  402439:	48 c1 ea 02          	shr    $0x2,%rdx
+  40243d:	49 89 d1             	mov    %rdx,%r9
+  402440:	49 c1 e1 05          	shl    $0x5,%r9
+  402444:	eb 1a                	jmp    402460 <kernel_unit+0x40>
+  402446:	48 8d b4 26 00 00 00 	lea    0x0(%rsi,%riz,1),%rsi
+  40244d:	00 
+  40244e:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  402455:	00 00 
+  402457:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  40245e:	00 00 
+  402460:	c5 fd 10 04 06       	vmovupd (%rsi,%rax,1),%ymm0
+  402465:	c4 c1 7d 59 04 00    	vmulpd (%r8,%rax,1),%ymm0,%ymm0
+  40246b:	c5 fd 11 04 01       	vmovupd %ymm0,(%rcx,%rax,1)
+  402470:	48 83 c0 20          	add    $0x20,%rax
+  402474:	4c 39 c8             	cmp    %r9,%rax
+  402477:	75 e7                	jne    402460 <kernel_unit+0x40>
+  402479:	48 8d 04 95 00 00 00 	lea    0x0(,%rdx,4),%rax
+  402480:	00 
+  402481:	48 39 c7             	cmp    %rax,%rdi
+  402484:	74 42                	je     4024c8 <kernel_unit+0xa8>
+  402486:	c5 f8 77             	vzeroupper
+  402489:	48 29 c7             	sub    %rax,%rdi
+  40248c:	48 83 ff 01          	cmp    $0x1,%rdi
+  402490:	74 1f                	je     4024b1 <kernel_unit+0x91>
+  402492:	c5 f9 10 04 c6       	vmovupd (%rsi,%rax,8),%xmm0
+  402497:	c4 c1 79 59 04 c0    	vmulpd (%r8,%rax,8),%xmm0,%xmm0
+  40249d:	48 89 fa             	mov    %rdi,%rdx
+  4024a0:	48 83 e2 fe          	and    $0xfffffffffffffffe,%rdx
+  4024a4:	83 e7 01             	and    $0x1,%edi
+  4024a7:	c5 f9 11 04 c1       	vmovupd %xmm0,(%rcx,%rax,8)
+  4024ac:	74 13                	je     4024c1 <kernel_unit+0xa1>
+  4024ae:	48 01 d0             	add    %rdx,%rax
+  4024b1:	c4 c1 7b 10 04 c0    	vmovsd (%r8,%rax,8),%xmm0
+  4024b7:	c5 fb 59 04 c6       	vmulsd (%rsi,%rax,8),%xmm0,%xmm0
+  4024bc:	c5 fb 11 04 c1       	vmovsd %xmm0,(%rcx,%rax,8)
+  4024c1:	c3                   	ret
+  4024c2:	2e 48 8d 74 26 00    	cs lea 0x0(%rsi,%riz,1),%rsi
+  4024c8:	c5 f8 77             	vzeroupper
+  4024cb:	c3                   	ret
+  4024cc:	48 8d 76 00          	lea    0x0(%rsi),%rsi
+  4024d0:	31 c0                	xor    %eax,%eax
+  4024d2:	eb b5                	jmp    402489 <kernel_unit+0x69>
+  4024d4:	48 89 f6             	mov    %rsi,%rsi
+  4024d7:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  4024de:	00 00 
+

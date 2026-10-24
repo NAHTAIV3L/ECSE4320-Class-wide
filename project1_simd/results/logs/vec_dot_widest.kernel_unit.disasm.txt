@@ -1,0 +1,108 @@
+00000000004025d0 <kernel_unit.isra.0>:
+  4025d0:	48 8d 47 ff          	lea    -0x1(%rdi),%rax
+  4025d4:	c5 f9 ef c0          	vpxor  %xmm0,%xmm0,%xmm0
+  4025d8:	49 89 f0             	mov    %rsi,%r8
+  4025db:	49 89 d1             	mov    %rdx,%r9
+  4025de:	48 83 f8 0e          	cmp    $0xe,%rax
+  4025e2:	0f 86 88 01 00 00    	jbe    402770 <kernel_unit.isra.0+0x1a0>
+  4025e8:	48 89 fe             	mov    %rdi,%rsi
+  4025eb:	c5 fd 28 d8          	vmovapd %ymm0,%ymm3
+  4025ef:	c5 fd 28 c8          	vmovapd %ymm0,%ymm1
+  4025f3:	4c 89 c0             	mov    %r8,%rax
+  4025f6:	48 c1 ee 04          	shr    $0x4,%rsi
+  4025fa:	c5 fd 28 d0          	vmovapd %ymm0,%ymm2
+  4025fe:	48 89 f1             	mov    %rsi,%rcx
+  402601:	48 c1 e1 07          	shl    $0x7,%rcx
+  402605:	4c 01 c1             	add    %r8,%rcx
+  402608:	eb 36                	jmp    402640 <kernel_unit.isra.0+0x70>
+  40260a:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  402611:	00 00 
+  402613:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  40261a:	00 00 
+  40261c:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  402623:	00 00 
+  402625:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  40262c:	00 00 
+  40262e:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  402635:	00 00 
+  402637:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  40263e:	00 00 
+  402640:	c5 fd 10 20          	vmovupd (%rax),%ymm4
+  402644:	c5 fd 10 68 20       	vmovupd 0x20(%rax),%ymm5
+  402649:	48 83 e8 80          	sub    $0xffffffffffffff80,%rax
+  40264d:	48 83 ea 80          	sub    $0xffffffffffffff80,%rdx
+  402651:	c5 fd 10 70 c0       	vmovupd -0x40(%rax),%ymm6
+  402656:	c5 fd 10 78 e0       	vmovupd -0x20(%rax),%ymm7
+  40265b:	c4 e2 dd b8 42 80    	vfmadd231pd -0x80(%rdx),%ymm4,%ymm0
+  402661:	c4 e2 d5 b8 52 a0    	vfmadd231pd -0x60(%rdx),%ymm5,%ymm2
+  402667:	c4 e2 cd b8 4a c0    	vfmadd231pd -0x40(%rdx),%ymm6,%ymm1
+  40266d:	c4 e2 c5 b8 5a e0    	vfmadd231pd -0x20(%rdx),%ymm7,%ymm3
+  402673:	48 39 c8             	cmp    %rcx,%rax
+  402676:	75 c8                	jne    402640 <kernel_unit.isra.0+0x70>
+  402678:	c5 fd 58 c2          	vaddpd %ymm2,%ymm0,%ymm0
+  40267c:	c5 f5 58 cb          	vaddpd %ymm3,%ymm1,%ymm1
+  402680:	48 89 f0             	mov    %rsi,%rax
+  402683:	48 c1 e0 04          	shl    $0x4,%rax
+  402687:	48 39 c7             	cmp    %rax,%rdi
+  40268a:	c5 f5 58 c8          	vaddpd %ymm0,%ymm1,%ymm1
+  40268e:	c4 e3 7d 19 c8 01    	vextractf128 $0x1,%ymm1,%xmm0
+  402694:	c5 f9 58 c1          	vaddpd %xmm1,%xmm0,%xmm0
+  402698:	c5 f9 15 c8          	vunpckhpd %xmm0,%xmm0,%xmm1
+  40269c:	c5 f1 58 c8          	vaddpd %xmm0,%xmm1,%xmm1
+  4026a0:	0f 84 d5 00 00 00    	je     40277b <kernel_unit.isra.0+0x1ab>
+  4026a6:	c5 f8 77             	vzeroupper
+  4026a9:	48 29 c7             	sub    %rax,%rdi
+  4026ac:	48 83 ff 01          	cmp    $0x1,%rdi
+  4026b0:	0f 84 97 00 00 00    	je     40274d <kernel_unit.isra.0+0x17d>
+  4026b6:	48 89 fa             	mov    %rdi,%rdx
+  4026b9:	48 8d 0c c5 00 00 00 	lea    0x0(,%rax,8),%rcx
+  4026c0:	00 
+  4026c1:	48 d1 ea             	shr    $1,%rdx
+  4026c4:	49 8d 34 08          	lea    (%r8,%rcx,1),%rsi
+  4026c8:	4c 01 c9             	add    %r9,%rcx
+  4026cb:	48 83 fa 01          	cmp    $0x1,%rdx
+  4026cf:	c5 f9 10 16          	vmovupd (%rsi),%xmm2
+  4026d3:	c4 e2 e9 b8 01       	vfmadd231pd (%rcx),%xmm2,%xmm0
+  4026d8:	74 60                	je     40273a <kernel_unit.isra.0+0x16a>
+  4026da:	48 83 fa 02          	cmp    $0x2,%rdx
+  4026de:	c5 f9 10 59 10       	vmovupd 0x10(%rcx),%xmm3
+  4026e3:	c4 e2 e1 b8 46 10    	vfmadd231pd 0x10(%rsi),%xmm3,%xmm0
+  4026e9:	74 4f                	je     40273a <kernel_unit.isra.0+0x16a>
+  4026eb:	48 83 fa 03          	cmp    $0x3,%rdx
+  4026ef:	c5 f9 10 56 20       	vmovupd 0x20(%rsi),%xmm2
+  4026f4:	c4 e2 e9 b8 41 20    	vfmadd231pd 0x20(%rcx),%xmm2,%xmm0
+  4026fa:	74 3e                	je     40273a <kernel_unit.isra.0+0x16a>
+  4026fc:	48 83 fa 04          	cmp    $0x4,%rdx
+  402700:	c5 f9 10 5e 30       	vmovupd 0x30(%rsi),%xmm3
+  402705:	c4 e2 e1 b8 41 30    	vfmadd231pd 0x30(%rcx),%xmm3,%xmm0
+  40270b:	74 2d                	je     40273a <kernel_unit.isra.0+0x16a>
+  40270d:	48 83 fa 05          	cmp    $0x5,%rdx
+  402711:	c5 f9 10 56 40       	vmovupd 0x40(%rsi),%xmm2
+  402716:	c4 e2 e9 b8 41 40    	vfmadd231pd 0x40(%rcx),%xmm2,%xmm0
+  40271c:	74 1c                	je     40273a <kernel_unit.isra.0+0x16a>
+  40271e:	48 83 fa 06          	cmp    $0x6,%rdx
+  402722:	c5 f9 10 5e 50       	vmovupd 0x50(%rsi),%xmm3
+  402727:	c4 e2 e1 b8 41 50    	vfmadd231pd 0x50(%rcx),%xmm3,%xmm0
+  40272d:	74 0b                	je     40273a <kernel_unit.isra.0+0x16a>
+  40272f:	c5 f9 10 56 60       	vmovupd 0x60(%rsi),%xmm2
+  402734:	c4 e2 e9 b8 41 60    	vfmadd231pd 0x60(%rcx),%xmm2,%xmm0
+  40273a:	48 01 d2             	add    %rdx,%rdx
+  40273d:	c5 f9 15 c8          	vunpckhpd %xmm0,%xmm0,%xmm1
+  402741:	48 39 d7             	cmp    %rdx,%rdi
+  402744:	c5 f1 58 c8          	vaddpd %xmm0,%xmm1,%xmm1
+  402748:	74 0f                	je     402759 <kernel_unit.isra.0+0x189>
+  40274a:	48 01 d0             	add    %rdx,%rax
+  40274d:	c4 c1 7b 10 1c c0    	vmovsd (%r8,%rax,8),%xmm3
+  402753:	c4 c2 e1 b9 0c c1    	vfmadd231sd (%r9,%rax,8),%xmm3,%xmm1
+  402759:	c5 fb 11 0d 57 29 00 	vmovsd %xmm1,0x2957(%rip)        # 4050b8 <g_result>
+  402760:	00 
+  402761:	c5 fb 11 0d 47 29 00 	vmovsd %xmm1,0x2947(%rip)        # 4050b0 <g_sink>
+  402768:	00 
+  402769:	c3                   	ret
+  40276a:	2e 48 8d 74 26 00    	cs lea 0x0(%rsi,%riz,1),%rsi
+  402770:	c5 f1 57 c9          	vxorpd %xmm1,%xmm1,%xmm1
+  402774:	31 c0                	xor    %eax,%eax
+  402776:	e9 2e ff ff ff       	jmp    4026a9 <kernel_unit.isra.0+0xd9>
+  40277b:	c5 f8 77             	vzeroupper
+  40277e:	eb d9                	jmp    402759 <kernel_unit.isra.0+0x189>
+

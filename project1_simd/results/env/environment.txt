@@ -1,0 +1,113 @@
+# Environment captured: 2026-10-23T15:19:25-04:00
+
+## uname
+Linux t2 7.2.2-t2 #1 SMP PREEMPT_DYNAMIC Fri Sep 18 02:12:29 EDT 2026 x86_64 GNU/Linux
+
+## CPU
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           46 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  16
+On-line CPU(s) list:                     0-15
+Vendor ID:                               GenuineIntel
+Model name:                              Intel(R) Core(TM) Ultra 9 185H
+CPU family:                              6
+Model:                                   170
+Thread(s) per core:                      2
+Core(s) per socket:                      10
+Socket(s):                               1
+Stepping:                                4
+Microcode version:                       0x28
+CPU(s) scaling MHz:                      41%
+CPU max MHz:                             5100.0000
+CPU min MHz:                             400.0000
+BogoMIPS:                                6144.00
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect avx_vnni dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid bus_lock_detect movdiri movdir64b fsrm md_clear serialize pconfig arch_lbr ibt flush_l1d arch_capabilities
+Virtualization:                          VT-x
+L1d cache:                               416 KiB (10 instances)
+L1i cache:                               640 KiB (10 instances)
+L2 cache:                                14 MiB (7 instances)
+L3 cache:                                24 MiB (1 instance)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-15
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Ghostwrite:                Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Not affected
+Vulnerability Meltdown:                  Not affected
+Vulnerability Mmio stale data:           Not affected
+Vulnerability Old microcode:             Not affected
+Vulnerability Reg file data sampling:    Not affected
+Vulnerability Retbleed:                  Not affected
+Vulnerability Spec rstack overflow:      Not affected
+Vulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS Not affected; BHI BHI_DIS_S
+Vulnerability Srbds:                     Not affected
+Vulnerability Tsa:                       Not affected
+Vulnerability Tsx async abort:           Not affected
+Vulnerability Vmscape:                   Mitigation; IBPB before exit to userspace
+
+## Compiler
+gcc (T2) 16.2.0
+Copyright (C) 2026 Free Software Foundation, Inc.
+
+## Governor / frequency
+/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu12/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu13/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu14/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu15/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor: powersave
+/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor: powersave
+
+## SMT topology (CPU -> thread siblings)
+/sys/devices/system/cpu/cpu0/topology/thread_siblings_list: 0,5
+/sys/devices/system/cpu/cpu10/topology/thread_siblings_list: 10-11
+/sys/devices/system/cpu/cpu11/topology/thread_siblings_list: 10-11
+/sys/devices/system/cpu/cpu12/topology/thread_siblings_list: 12
+/sys/devices/system/cpu/cpu13/topology/thread_siblings_list: 13
+/sys/devices/system/cpu/cpu14/topology/thread_siblings_list: 14
+/sys/devices/system/cpu/cpu15/topology/thread_siblings_list: 15
+/sys/devices/system/cpu/cpu1/topology/thread_siblings_list: 1-2
+/sys/devices/system/cpu/cpu2/topology/thread_siblings_list: 1-2
+/sys/devices/system/cpu/cpu3/topology/thread_siblings_list: 3-4
+/sys/devices/system/cpu/cpu4/topology/thread_siblings_list: 3-4
+/sys/devices/system/cpu/cpu5/topology/thread_siblings_list: 0,5
+/sys/devices/system/cpu/cpu6/topology/thread_siblings_list: 6-7
+/sys/devices/system/cpu/cpu7/topology/thread_siblings_list: 6-7
+/sys/devices/system/cpu/cpu8/topology/thread_siblings_list: 8-9
+/sys/devices/system/cpu/cpu9/topology/thread_siblings_list: 8-9
+
+## Transparent huge pages
+[always] madvise never
+
+## Tool availability
+gcc        /usr/bin/gcc
+ninja      /usr/bin/ninja
+taskset    /usr/bin/taskset
+perf       MISSING
+objdump    /usr/bin/objdump
+python3    /usr/bin/python3
+
+## Build flags (from build.ninja)
+cflags-saxpy-scalar-double = -DSAXPY -DTYPE=double -DOPT_NAME=scalar  -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+cflags-saxpy-widest-double = -DSAXPY -DTYPE=double -DOPT_NAME=widest  -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra
+cflags-dot-scalar-double = -DDOT -DTYPE=double -DOPT_NAME=scalar  -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+cflags-dot-widest-double = -DDOT -DTYPE=double -DOPT_NAME=widest  -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra
+cflags-multiply-scalar-double = -DMULTIPLY -DTYPE=double -DOPT_NAME=scalar  -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+cflags-multiply-widest-double = -DMULTIPLY -DTYPE=double -DOPT_NAME=widest  -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra
+cflags-stencil-scalar-double = -DSTENCIL -DTYPE=double -DOPT_NAME=scalar  -march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize -std=c11 -Wall -Wextra
+cflags-stencil-widest-double = -DSTENCIL -DTYPE=double -DOPT_NAME=widest  -O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno -std=c11 -Wall -Wextra

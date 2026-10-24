@@ -1,0 +1,45 @@
+00000000004025d0 <kernel_unit.isra.0>:
+  4025d0:	c4 e2 7d 19 15 ef 0b 	vbroadcastsd 0xbef(%rip),%ymm2        # 4031c8 <_IO_stdin_used+0x1c8>
+  4025d7:	00 00 
+  4025d9:	48 8d 47 ff          	lea    -0x1(%rdi),%rax
+  4025dd:	48 83 f8 02          	cmp    $0x2,%rax
+  4025e1:	0f 86 89 00 00 00    	jbe    402670 <kernel_unit.isra.0+0xa0>
+  4025e7:	48 89 f9             	mov    %rdi,%rcx
+  4025ea:	31 c0                	xor    %eax,%eax
+  4025ec:	c5 fd 28 ca          	vmovapd %ymm2,%ymm1
+  4025f0:	48 c1 e9 02          	shr    $0x2,%rcx
+  4025f4:	49 89 c8             	mov    %rcx,%r8
+  4025f7:	49 c1 e0 05          	shl    $0x5,%r8
+  4025fb:	48 8d 74 26 00       	lea    0x0(%rsi,%riz,1),%rsi
+  402600:	c5 fd 10 04 06       	vmovupd (%rsi,%rax,1),%ymm0
+  402605:	c4 e2 f5 a8 04 02    	vfmadd213pd (%rdx,%rax,1),%ymm1,%ymm0
+  40260b:	c5 fd 11 04 02       	vmovupd %ymm0,(%rdx,%rax,1)
+  402610:	48 83 c0 20          	add    $0x20,%rax
+  402614:	4c 39 c0             	cmp    %r8,%rax
+  402617:	75 e7                	jne    402600 <kernel_unit.isra.0+0x30>
+  402619:	48 8d 04 8d 00 00 00 	lea    0x0(,%rcx,4),%rax
+  402620:	00 
+  402621:	48 39 c7             	cmp    %rax,%rdi
+  402624:	74 40                	je     402666 <kernel_unit.isra.0+0x96>
+  402626:	48 29 c7             	sub    %rax,%rdi
+  402629:	48 83 ff 01          	cmp    $0x1,%rdi
+  40262d:	74 1f                	je     40264e <kernel_unit.isra.0+0x7e>
+  40262f:	c5 f9 10 1c c2       	vmovupd (%rdx,%rax,8),%xmm3
+  402634:	c4 e2 e1 98 14 c6    	vfmadd132pd (%rsi,%rax,8),%xmm3,%xmm2
+  40263a:	48 89 f9             	mov    %rdi,%rcx
+  40263d:	48 83 e1 fe          	and    $0xfffffffffffffffe,%rcx
+  402641:	83 e7 01             	and    $0x1,%edi
+  402644:	c5 f9 11 14 c2       	vmovupd %xmm2,(%rdx,%rax,8)
+  402649:	74 1b                	je     402666 <kernel_unit.isra.0+0x96>
+  40264b:	48 01 c8             	add    %rcx,%rax
+  40264e:	c5 fb 10 24 c2       	vmovsd (%rdx,%rax,8),%xmm4
+  402653:	c5 fb 10 04 c6       	vmovsd (%rsi,%rax,8),%xmm0
+  402658:	c4 e2 d9 99 05 67 0b 	vfmadd132sd 0xb67(%rip),%xmm4,%xmm0        # 4031c8 <_IO_stdin_used+0x1c8>
+  40265f:	00 00 
+  402661:	c5 fb 11 04 c2       	vmovsd %xmm0,(%rdx,%rax,8)
+  402666:	c5 f8 77             	vzeroupper
+  402669:	c3                   	ret
+  40266a:	2e 48 8d 74 26 00    	cs lea 0x0(%rsi,%riz,1),%rsi
+  402670:	31 c0                	xor    %eax,%eax
+  402672:	eb b2                	jmp    402626 <kernel_unit.isra.0+0x56>
+

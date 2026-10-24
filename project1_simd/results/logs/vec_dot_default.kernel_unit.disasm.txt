@@ -1,0 +1,39 @@
+0000000000402290 <kernel_unit.isra.0>:
+  402290:	49 89 f8             	mov    %rdi,%r8
+  402293:	48 83 ff 01          	cmp    $0x1,%rdi
+  402297:	74 77                	je     402310 <kernel_unit.isra.0+0x80>
+  402299:	48 d1 ef             	shr    $1,%rdi
+  40229c:	31 c0                	xor    %eax,%eax
+  40229e:	66 0f ef c9          	pxor   %xmm1,%xmm1
+  4022a2:	48 89 f9             	mov    %rdi,%rcx
+  4022a5:	48 c1 e1 04          	shl    $0x4,%rcx
+  4022a9:	48 8d 74 26 00       	lea    0x0(%rsi,%riz,1),%rsi
+  4022ae:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  4022b5:	00 00 
+  4022b7:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  4022be:	00 00 
+  4022c0:	66 0f 10 04 06       	movupd (%rsi,%rax,1),%xmm0
+  4022c5:	66 0f 10 1c 02       	movupd (%rdx,%rax,1),%xmm3
+  4022ca:	48 83 c0 10          	add    $0x10,%rax
+  4022ce:	66 0f 59 c3          	mulpd  %xmm3,%xmm0
+  4022d2:	f2 0f 58 c8          	addsd  %xmm0,%xmm1
+  4022d6:	66 0f 15 c0          	unpckhpd %xmm0,%xmm0
+  4022da:	f2 0f 58 c8          	addsd  %xmm0,%xmm1
+  4022de:	48 39 c8             	cmp    %rcx,%rax
+  4022e1:	75 dd                	jne    4022c0 <kernel_unit.isra.0+0x30>
+  4022e3:	48 8d 04 3f          	lea    (%rdi,%rdi,1),%rax
+  4022e7:	4c 39 c0             	cmp    %r8,%rax
+  4022ea:	74 0e                	je     4022fa <kernel_unit.isra.0+0x6a>
+  4022ec:	f2 0f 10 04 c2       	movsd  (%rdx,%rax,8),%xmm0
+  4022f1:	f2 0f 59 04 c6       	mulsd  (%rsi,%rax,8),%xmm0
+  4022f6:	f2 0f 58 c8          	addsd  %xmm0,%xmm1
+  4022fa:	f2 0f 11 0d b6 2d 00 	movsd  %xmm1,0x2db6(%rip)        # 4050b8 <g_result>
+  402301:	00 
+  402302:	f2 0f 11 0d a6 2d 00 	movsd  %xmm1,0x2da6(%rip)        # 4050b0 <g_sink>
+  402309:	00 
+  40230a:	c3                   	ret
+  40230b:	48 8d 74 26 00       	lea    0x0(%rsi,%riz,1),%rsi
+  402310:	66 0f ef c9          	pxor   %xmm1,%xmm1
+  402314:	31 c0                	xor    %eax,%eax
+  402316:	eb d4                	jmp    4022ec <kernel_unit.isra.0+0x5c>
+

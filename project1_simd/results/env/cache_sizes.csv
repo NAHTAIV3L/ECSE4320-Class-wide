@@ -1,0 +1,5 @@
+level,type,size_bytes,line_bytes,sets,ways
+1,Data,49152,64,64,12
+1,Instruction,65536,64,64,16
+2,Unified,2097152,64,2048,16
+3,Unified,25165824,64,32768,12

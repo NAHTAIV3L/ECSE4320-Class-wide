@@ -1,0 +1,39 @@
+Project 1 vectorization verification summary
+Generated: 2026-10-23T15:19:24-04:00
+
+kernel    optimization  kernel_xmm_refs  kernel_ymm_refs  kernel_zmm_refs  kernel_fma_ymm  vectorized_kernel_reports  missed_kernel_reports
+saxpy     scalar        5                0                0                0               0                          0
+saxpy     default       11               0                0                0               1                          0
+saxpy     widest        7                5                0                1               2                          0
+dot       scalar        6                0                0                0               0                          0
+dot       default       13               0                0                0               1                          0
+dot       widest        26               15               0                4               2                          0
+multiply  scalar        3                0                0                0               0                          0
+multiply  default       10               0                0                0               1                          0
+multiply  widest        6                3                0                0               2                          0
+stencil   scalar        17               0                0                0               0                          0
+stencil   default       30               0                0                0               1                          0
+stencil   widest        15               10               0                2               2                          0
+
+kernel_unit disassembly: xmm_refs/ymm_refs count only the timed kernel.
+Expected: scalar=0, default has baseline-ISA vectors, widest has 256-bit
+AVX2/FMA. The gather path uses indirect loads and is not expected to
+vectorise; these logs cover the unit-stride kernel.
+
+Selected 'loop vectorized' lines inside the kernel (widest build):
+--- saxpy ---
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:124:26: optimized: loop vectorized using 32 byte vectors and unroll factor 4
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:124:26: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 2
+--- dot ---
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:127:26: optimized: loop vectorized using 32 byte vectors and unroll factor 16
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:127:26: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 2
+--- multiply ---
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:131:26: optimized: loop vectorized using 32 byte vectors and unroll factor 4
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:131:26: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 2
+--- stencil ---
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:134:30: optimized: loop vectorized using 32 byte vectors and unroll factor 4
+/home/nahtaiv3l/rpi/acs/ECSE-4320-class-wide/project1_simd/main.c:134:30: optimized: epilogue loop vectorized using 16 byte vectors and unroll factor 2
+
+Dot reduction, default build (no FP reassociation):
+
+Full reports and disassembly are kept beside this file; do not paste them.

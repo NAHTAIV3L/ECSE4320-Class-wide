@@ -1,0 +1,37 @@
+0000000000402080 <kernel_unit>:
+  402080:	49 89 f9             	mov    %rdi,%r9
+  402083:	48 83 ff 01          	cmp    $0x1,%rdi
+  402087:	74 57                	je     4020e0 <kernel_unit+0x60>
+  402089:	49 89 f8             	mov    %rdi,%r8
+  40208c:	31 c0                	xor    %eax,%eax
+  40208e:	49 d1 e8             	shr    $1,%r8
+  402091:	4c 89 c7             	mov    %r8,%rdi
+  402094:	48 c1 e7 04          	shl    $0x4,%rdi
+  402098:	48 8d b4 26 00 00 00 	lea    0x0(%rsi,%riz,1),%rsi
+  40209f:	00 
+  4020a0:	66 0f 10 04 06       	movupd (%rsi,%rax,1),%xmm0
+  4020a5:	66 0f 10 0c 02       	movupd (%rdx,%rax,1),%xmm1
+  4020aa:	66 0f 59 c1          	mulpd  %xmm1,%xmm0
+  4020ae:	0f 11 04 01          	movups %xmm0,(%rcx,%rax,1)
+  4020b2:	48 83 c0 10          	add    $0x10,%rax
+  4020b6:	48 39 c7             	cmp    %rax,%rdi
+  4020b9:	75 e5                	jne    4020a0 <kernel_unit+0x20>
+  4020bb:	4b 8d 04 00          	lea    (%r8,%r8,1),%rax
+  4020bf:	49 39 c1             	cmp    %rax,%r9
+  4020c2:	74 14                	je     4020d8 <kernel_unit+0x58>
+  4020c4:	f2 0f 10 04 c2       	movsd  (%rdx,%rax,8),%xmm0
+  4020c9:	f2 0f 59 04 c6       	mulsd  (%rsi,%rax,8),%xmm0
+  4020ce:	f2 0f 11 04 c1       	movsd  %xmm0,(%rcx,%rax,8)
+  4020d3:	c3                   	ret
+  4020d4:	48 8d 76 00          	lea    0x0(%rsi),%rsi
+  4020d8:	c3                   	ret
+  4020d9:	48 8d b6 00 00 00 00 	lea    0x0(%rsi),%rsi
+  4020e0:	31 c0                	xor    %eax,%eax
+  4020e2:	f2 0f 10 04 c2       	movsd  (%rdx,%rax,8),%xmm0
+  4020e7:	f2 0f 59 04 c6       	mulsd  (%rsi,%rax,8),%xmm0
+  4020ec:	f2 0f 11 04 c1       	movsd  %xmm0,(%rcx,%rax,8)
+  4020f1:	c3                   	ret
+  4020f2:	48 8d 74 26 00       	lea    0x0(%rsi,%riz,1),%rsi
+  4020f7:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  4020fe:	00 00 
+

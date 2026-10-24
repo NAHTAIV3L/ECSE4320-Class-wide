@@ -1,0 +1,43 @@
+#!/bin/bash
+# Generate build.ninja for Project 1.
+#
+# scalar : optimisation on, but both loop and SLP vectorisation disabled.
+# default: -O3 auto-vectorisation with the baseline x86-64 ISA.
+# widest : -O3 -march=native, plus FP reassociation so reductions (dot) can be
+#          vectorised.  The flag difference is documented in README.md.
+
+set -euo pipefail
+cd "$(dirname "$0")"
+write() { echo "$@" >> build.ninja; }
+rm -f build.ninja
+
+write 'builddir = build'
+declare -A optimizations
+optimizations["scalar"]="-march=x86-64 -O2 -fno-tree-vectorize -fno-tree-slp-vectorize"
+optimizations["default"]="-march=x86-64 -O3 -ftree-vectorize"
+optimizations["widest"]="-O3 -march=native -mprefer-vector-width=256 -ftree-vectorize -ffast-math -fno-math-errno"
+
+all_targets=""
+
+for kernel in saxpy dot multiply stencil; do
+    for optimization in scalar default widest; do
+        for ty in float double; do
+            k=$(echo "$kernel" | tr 'a-z' 'A-Z')
+            target="${kernel}-${optimization}-${ty}"
+            extras=""
+            [ "$ty" = "float" ] && extras="-DTYPE_FLOAT"
+            cflags="-D${k} -DTYPE=${ty} -DOPT_NAME=${optimization} ${extras} ${optimizations[$optimization]} -std=c11 -Wall -Wextra"
+            write "cflags-${target} = ${cflags}"
+            write "rule cc-${target}"
+            write '  deps = gcc'
+            write '  depfile = $out.d'
+            write '  description = CC $out'
+            write "  command = gcc -MD -MF \$out.d \$cflags-$target \$in -o \$out -lm"
+            write "build build/$target: cc-${target} main.c"
+            write "build $target: phony build/$target"
+            all_targets="$all_targets $target"
+        done
+    done
+done
+write "default $all_targets"
+echo "wrote build.ninja with $(echo $all_targets | wc -w) binaries"

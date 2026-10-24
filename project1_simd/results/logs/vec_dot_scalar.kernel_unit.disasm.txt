@@ -1,0 +1,18 @@
+0000000000401f90 <kernel_unit.isra.0>:
+  401f90:	66 0f ef c9          	pxor   %xmm1,%xmm1
+  401f94:	31 c0                	xor    %eax,%eax
+  401f96:	90                   	nop
+  401f97:	2e 48 8d b4 26 00 00 	cs lea 0x0(%rsi,%riz,1),%rsi
+  401f9e:	00 00 
+  401fa0:	f2 0f 10 04 c6       	movsd  (%rsi,%rax,8),%xmm0
+  401fa5:	f2 0f 59 04 c2       	mulsd  (%rdx,%rax,8),%xmm0
+  401faa:	48 83 c0 01          	add    $0x1,%rax
+  401fae:	f2 0f 58 c8          	addsd  %xmm0,%xmm1
+  401fb2:	48 39 f8             	cmp    %rdi,%rax
+  401fb5:	75 e9                	jne    401fa0 <kernel_unit.isra.0+0x10>
+  401fb7:	f2 0f 11 0d f9 20 00 	movsd  %xmm1,0x20f9(%rip)        # 4040b8 <g_result>
+  401fbe:	00 
+  401fbf:	f2 0f 11 0d e9 20 00 	movsd  %xmm1,0x20e9(%rip)        # 4040b0 <g_sink>
+  401fc6:	00 
+  401fc7:	c3                   	ret
+
