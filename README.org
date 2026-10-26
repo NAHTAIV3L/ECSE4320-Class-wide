@@ -1,0 +1,30 @@
+* Class Wide projects
+
+** Projects:
+
+- [[./project1_simd/README.org][Project 1]]
+- [[./project2_cache/README.org][Project 2]]
+- [[./project3_ssd/README.org][Project 3]]
+
+** Graph Analysis
+
+All graph analysis was done by me along with writing all of the README files and
+ensuring that the data makes sense.
+
+** Setting up a python environment for generating the plots
+
+#+BEGIN_SRC sh
+python3 -m venv .venv
+. ./.venv/bin/activate
+pip install -r requirements.txt
+#+END_SRC
+
+Or just have =pandas= =numpy= and =matplotlib= installed
+
+** AI Use
+
+All of the code was written by DeepSeek v4.1 Flash using opencode. It also wrote
+all of the code for transforming the data and generating the plots. The code was
+reviewed by me and I got AI to fix the errors. one error that it had was when
+doing strides it would not access all values it would just jump by some stride
+and ignore all values passed by the stride.

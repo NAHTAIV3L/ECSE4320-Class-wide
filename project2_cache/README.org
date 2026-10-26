@@ -60,7 +60,7 @@ check the difference of huge pages.
 | TLB / huge pages                    |       9 |
 | Benchmark pitfall                   |      10 |
 
-** Plot analysis:
+** Plot Analysis:
 
 *** Latency
 

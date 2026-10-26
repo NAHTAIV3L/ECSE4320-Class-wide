@@ -76,7 +76,9 @@ both decreasing while QD=32 is increasing as there are more reads. This could be
 because when the cpu issues a write it can almost immediately return but when
 issuing a read it actually has to wait for the SSD to return the data. The
 reason that QD=32 seems to not be effected is because it has more queued
-operations to wait on so it can read whichever ends first.
+operations to wait on so it can read whichever ends first. I think that the
+random spike in the middle of the QD=1 and QD=8 graphs is just random other
+things happening in the background and it should be ignored
 
 [[./results/graphs/03_read_write_mix.png][read write mix]]
 

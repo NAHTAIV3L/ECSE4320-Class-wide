@@ -29,7 +29,7 @@
 | =Default= | ~-march=x86-64 -O3 -ftree-vectorize~                                      | baseline x86-64 (SSE2, 128-bit) auto-vectorisation                           |
 | =Widest=  | ~-march=native -O3 -mprefer-vector-width=256 -ffast-math -fno-math-errno~ | widest ISA (AVX2, 256-bit) plus FP reassociation so reductions can vectorise |
 
-** My computer specific info:
+** My Computer Specific Info:
 
 My computer defaults to doing ~-march=x86_64-v3~ so this has to be
 disabled. Also default optimizations are turned on while disabling vectorization
@@ -47,7 +47,7 @@ environment. This environment is generated with [[./scripts/capture_env.sh]]
 |---------------------------------------------------------+--------------|
 | Scalar vs auto-vectorized vs widest across working sets |         1, 2 |
 | Locality sweep with cache annotations                   |            3 |
-| Alignment and tail handling                             |          4,5 |
+| Alignment and tail handling                             |         4, 5 |
 | Stride/gather                                           | 6, 7, 11, 12 |
 | Data-type comparison                                    |            8 |
 | Roofline                                                |            9 |
