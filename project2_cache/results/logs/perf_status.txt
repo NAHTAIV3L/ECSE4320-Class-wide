@@ -1,0 +1,1 @@
+collected 56 counter rows on cpu 2 (pmu=cpu_core, perf -r 3); failures: []
