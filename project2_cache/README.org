@@ -14,7 +14,7 @@ python ./scripts/plot_results.py
 All of the tests are ran on a 5.1 GHz max cpu core with 48KB of L1d cache,
 2048KB of L2 cache, and 24MB of L3 cache.
 
-** Implementation Details
+** Implementation Details:
 
 ~./membench latency~ build a random cycle of pointers. Then it creates K chains
 allowing zero-queue dependent load latency between each chain. each cain starts
